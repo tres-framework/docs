@@ -1,4 +1,4 @@
-docs
-====
+Tres documentation
+==================
 
-The official Tres Framework documentation.
+This is the official documentation for Tres Framework.
