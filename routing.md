@@ -48,7 +48,9 @@ Route::register(['GET', 'POST'], '/multi-request-example', [
     'method' => 'beUseful'
 ]);
 ```
-What you notice, is that we make use of controllers. Its intent is to respond to user actions.
+Routes may start and end with a slash. It does not make a difference.
+
+What you notice is that we make use of controllers. Its intent is to respond to user actions.
 While it's not required to make use of a controller, we recommend doing so for consistency.
 ```php
 // Using lambda function.
@@ -104,8 +106,8 @@ Route::get('/about-us', [
 ```
 
 ## Dynamic routes
-Let's say you are making a blog. You of course wouldn't make a new route for every single post. 
-You only make one dynamic route which can be used for all your blog posts.
+Let's say you are making a blog. Of course you won't make a new route for every 
+single post. You only make one dynamic route which can be used for all your blog posts.
 ```php
 Route::get('/blog/:id/:title', [
     'controller' => 'BlogController',
