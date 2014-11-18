@@ -3,8 +3,8 @@ Routing
 
 ## Introduction
 
-The Tres routing system is always bundled with Tres Framework. It is however a 
-stand-alone package, which means that it can be used without the framework.
+The Tres routing system will always be bundled with Tres Framework. However, it's written in a certain way
+that it can be used without the framework.
 
 A router generally forwards you to something. In this case, we take the URI, match it with a 
 list and do something based on that. What you want to do with the routes is up to you.
@@ -17,8 +17,8 @@ but also that it's prettier for humans like you and me.
 So now you know what a router is, let's take a look at how you can make use of it.
 
 ### Registering routes
-There are several things you should know. First of all, you should have a basic understanding of 
-HTTP request methods. The most common ones are the GET and POST methods.
+Before making use of routes, you should have the slightest understanding of HTTP request methods. 
+The most common ones are the GET and POST methods.
 
 ```php
 <?php
@@ -78,11 +78,10 @@ Route::notFound([
 ### Accessing routes
 So you registered a few routes. Great! But how can you efficiently access them?
 
-The Tres router gives you the option to make use of aliasing. Aliasing is useful, because you might 
-change the page URL, but not change the page itself. It would be useful to be able to change the URL
-without having to change all the links in your pages. That is where aliasing comes of use.
+It would be useful to be able to change the URL without having to change all 
+the links in your pages. That is where aliasing comes of use.
 
-So let's say you have the following route:
+Let's say you have the following route:
 ```php
 Route::get('/about-me', [
     'alias' => 'about',
@@ -95,7 +94,7 @@ With the following code in your view:
 <a href="<?= URL::route('about'); ?>">Click here to know more!</a>
 ```
 This tells the router to find the first view with the "about" alias. At the moment, it points to
-/about-me. By changing the route URI, it will simply change along.
+/about-me. By changing the route URI, it will simply change anchor's href value along.
 ```php
 Route::get('/about-us', [
     'alias' => 'about',
