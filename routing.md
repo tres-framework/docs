@@ -43,12 +43,12 @@ Route::post('/contact', [
 ]);
 
 // Multi request
-Route::register(['GET', 'POST'], '/multi-request-example', function(){
-    //
-});
+Route::register(['GET', 'POST'], '/multi-request-example', [
+    'controller' => 'ExampleController',
+    'method' => 'beUseful'
+]);
 ```
 What you notice, is that we make use of controllers. Its intent is to respond to user actions.
-
 While it's not required to make use of a controller, we recommend doing so for consistency.
 ```php
 // Using lambda function.
@@ -67,7 +67,7 @@ Route::get('/', [
 ```
 
 ### Error pages
-You can customize the Error 404 Not Found page by using the notFound() method.
+You can change the Error 404 Not Found route by using the notFound() method.
 ```php
 Route::notFound([
     'controller' => 'ErrorController',
