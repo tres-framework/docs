@@ -32,16 +32,17 @@ Example autoload:
 ```php
 // Autoload
 spl_autoload_register(function($class){
-	$file = dirname(__DIR__).'/src/'.str_replace('\\', '/', $class.'.php');
+    $dirs = [
+        dirname(__DIR__).'/src/'
+    ];
+    
+    foreach($dirs as $dir){
+	    $file = str_replace('\\', '/', rtrim($dir, '/').'/'.$class.'.php');
 
-	if(is_readable($file)){
-		require_once($file);
-	} else {
-		if(is_file($file)){
-			die($file.' is not readable.');
-		} else {
-			die($file.' does not exist.');
-		}
+    	if(is_readable($file)){
+    		require_once($file);
+    		break;
+    	}
 	}
 });
 ```
