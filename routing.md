@@ -1,25 +1,24 @@
 Routing
 ============
 
+*The Tres routing system is bundled with Tres Framework. If you like it, you
+can also [use it without the framework][router-link].*
+
 ## Introduction
+A router generally forwards you to something. In this case, we take the URI,
+match it with a list and do something based on that. What you want to do with
+the routes is up to you.
 
-The Tres routing system will always be bundled with Tres Framework. However, it's written in a certain way
-that it can be used without the framework.
-
-A router generally forwards you to something. In this case, we take the URI, match it with a 
-list and do something based on that. What you want to do with the routes is up to you.
-
-This technique adds a degree of separation between the files used to generate a webpage and the 
-URL that is presented to the world. An addition to that is not only that it is search engine friendly,
-but also that it's prettier for humans like you and me.
+This technique adds a degree of separation between the files used to generate
+a webpage and the URL that is presented to the world. An addition to that is
+not only that it is search engine friendly, but also that it's prettier.
 
 ## Basic routing
-So now you know what a router is, let's take a look at how you can make use of it.
+Now you know what a router is, let's take a look at how you can make use of it.
 
 ### Registering routes
-Before making use of routes, you should have the slightest understanding of HTTP request methods. 
-The most common ones are the GET and POST methods.
-
+Before making use of routes, you should have the slightest understanding of
+HTTP request methods. The most common ones are the GET and POST methods.
 ```php
 <?php
 
@@ -50,8 +49,9 @@ Route::register(['GET', 'POST'], '/multi-request-example', [
 ```
 Routes may start and end with a slash. It does not make a difference.
 
-What you notice is that we make use of controllers. Its intent is to respond to user actions.
-While it's not required to make use of a controller, we recommend doing so for consistency.
+What you might notice is the use of controllers. Its intent is to respond to
+user actions. While it's not required to make use of a controller, it is
+recommended to do so for consistency and separation of concerns.
 ```php
 // Using lambda function.
 Route::get('/no-controller-example', function(){
@@ -69,7 +69,7 @@ Route::get('/', [
 ```
 
 ### Error pages
-You can change the Error 404 Not Found route by using the notFound() method.
+You can change the Error 404 Not Found route by using the `notFound` method.
 ```php
 Route::notFound([
     'controller' => 'ErrorController',
@@ -80,7 +80,7 @@ Route::notFound([
 ### Accessing routes
 So you registered a few routes. Great! But how can you efficiently access them?
 
-It would be useful to be able to change the URL without having to change all 
+It would be useful to be able to change the URL without having to change all
 the links in your pages. That is where aliasing comes of use.
 
 Let's say you have the following route:
@@ -91,12 +91,13 @@ Route::get('/about-me', [
     'method' => 'renderPage'
 ]);
 ```
-With the following code in your view:
+with the following code in your view:
 ```php
-<a href="<?= URL::route('about'); ?>">Click here to know more!</a>
+<a href="{{ URL::route('about'); }}">Click here to know more!</a>
 ```
-This tells the router to find the first view with the "about" alias. At the moment, it points to
-/about-me. By changing the route URI, it will simply change anchor's href value along.
+This tells the router to find the first view with the "about" alias. At the
+moment, it points to `/about-me`. By changing the route URI, it will simply
+change anchor's href value along.
 ```php
 Route::get('/about-us', [
     'alias' => 'about',
@@ -106,8 +107,9 @@ Route::get('/about-us', [
 ```
 
 ## Dynamic routes
-Let's say you are making a blog. Of course you won't make a new route for every 
-single post. You only make one dynamic route which can be used for all your blog posts.
+Let's say you are making a blog. It would be silly to make a new route for
+every single post. You can make a dynamic route which can be used for all your
+blog posts.
 ```php
 Route::get('/blog/:id/:title', [
     'controller' => 'BlogController',
@@ -119,8 +121,8 @@ Route::get('/number-echo/:number', function($number){
     echo $number;
 });
 ```
-At the moment of writing, the router does not support optional routes. If you want to make 
-the title optional, you have to duplicate the route and remove the :title.
+If you want to make a placeholder (like `:title`) optional, you have to
+duplicate the route and remove the placeholder (`:title` in this case).
 ```php
 Route::get('/blog/:id/', [
     'controller' => 'BlogController',
@@ -132,3 +134,12 @@ Route::get('/blog/:id/:title', [
     'method' => 'getPost'
 ]);
 ```
+
+## Importing routes
+If you are writing an application or just a large website, you might be
+interested in importing routes, so you have multiple route files.
+```php
+Route::import(VENDOR_DIR.'/ExampleApp/routes.php');
+```
+
+[router-link]: https://github.com/tres-framework/Tres-router
