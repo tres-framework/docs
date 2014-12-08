@@ -1,9 +1,6 @@
 Routing
 ============
 
-*The Tres routing system is bundled with Tres Framework. If you like it, you
-can also [use it without the framework][router-link].*
-
 ## Introduction
 A router generally forwards you to something. In this case, we take the URI,
 match it with a list and do something based on that. What you want to do with
@@ -141,5 +138,3 @@ interested in importing routes, so you have multiple route files.
 ```php
 Route::import(VENDOR_DIR.'/ExampleApp/routes.php');
 ```
-
-[router-link]: https://github.com/tres-framework/Tres-router
