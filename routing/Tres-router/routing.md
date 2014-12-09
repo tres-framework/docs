@@ -1,21 +1,12 @@
 Routing
 ============
 
-## Introduction
-A router generally forwards you to something. In this case, we take the URI,
-match it with a list and do something based on that. What you want to do with
-the routes is up to you.
-
-This technique adds a degree of separation between the files used to generate
-a webpage and the URL that is presented to the world. An addition to that is
-not only that it is search engine friendly, but also that it's prettier.
-
 ## Basic routing
 Now you know what a router is, let's take a look at how you can make use of it.
 
 ### Registering routes
 Before making use of routes, you should have the slightest understanding of
-HTTP request methods. The most common ones are the GET and POST methods.
+HTTP request methods. The most common ones are GET and POST.
 ```php
 <?php
 
@@ -47,7 +38,7 @@ Route::register(['GET', 'POST'], '/multi-request-example', [
 Routes may start and end with a slash. It does not make a difference.
 
 What you might notice is the use of controllers. Its intent is to respond to
-user actions. While it's not required to make use of a controller, it is
+user actions. While it is not required to make use of a controller, it is
 recommended to do so for consistency and separation of concerns.
 ```php
 // Using lambda function.
