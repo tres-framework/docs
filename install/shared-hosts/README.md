@@ -7,8 +7,8 @@ On a typical shared host, you have the following directory structure:
 -- /public_html
 ```
 
-*It does not really matter if `public_html` has a different name, because of
-Tres Framework's flexibility.*
+*Because of Tres Framework's flexibility, it does not really matter if
+`public_html` is named differently.*
 
 If you are in this scenario, the following instructions apply to you:
 
