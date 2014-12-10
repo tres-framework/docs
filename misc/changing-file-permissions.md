@@ -27,8 +27,7 @@ built-in terminal.*
 *Warning: You should know how to do this by yourself, otherwise it is
 recommended to stick with FileZilla.*
 
-Here is an example for Debian-based Linux distributions, but note that your
-actions might differ:
+Here is an example:
 
 ```bash
 # Connect to the server using username@domain
