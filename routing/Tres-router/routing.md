@@ -13,26 +13,22 @@ HTTP request methods. The most common ones are GET and POST.
 // Homepage
 Route::get('/', [
     'alias' => 'home',
-    'controller' => 'HomeController',
-    'method' => 'renderPage'
+    'uses' => 'HomeController@renderPage'
 ]);
 
 // Contact page
 Route::get('/contact', [
     'alias' => 'contact',
-    'controller' => 'ContactController',
-    'method' => 'renderPage'
+    'uses' => 'ContactController@renderPage'
 ]);
 
 Route::post('/contact', [
-    'controller' => 'ContactController',
-    'method' => 'sendMail'
+    'uses' => 'ContactController@sendMail'
 ]);
 
 // Multi request
 Route::register(['GET', 'POST'], '/multi-request-example', [
-    'controller' => 'ExampleController',
-    'method' => 'beUseful'
+    'uses' => 'ExampleController@beUseful'
 ]);
 ```
 Routes may start and end with a slash. It does not make a difference.
@@ -60,8 +56,7 @@ Route::get('/', [
 You can change the Error 404 Not Found route by using the `notFound` method.
 ```php
 Route::notFound([
-    'controller' => 'ErrorController',
-    'method' => 'notFound'
+    'uses' => 'ErrorController@notFound'
 ]);
 ```
 
@@ -75,8 +70,7 @@ Let's say you have the following route:
 ```php
 Route::get('/about-me', [
     'alias' => 'about',
-    'controller' => 'AboutController',
-    'method' => 'renderPage'
+    'uses' => 'AboutController@renderPage'
 ]);
 ```
 with the following code in your view:
@@ -89,8 +83,7 @@ change anchor's href value along.
 ```php
 Route::get('/about-us', [
     'alias' => 'about',
-    'controller' => 'AboutController',
-    'method' => 'renderPage'
+    'uses' => 'AboutController@renderPage'
 ]);
 ```
 
@@ -100,8 +93,7 @@ every single post. You can make a dynamic route which can be used for all your
 blog posts.
 ```php
 Route::get('/blog/:id/:title', [
-    'controller' => 'BlogController',
-    'method' => 'getPost'
+    'uses' => 'BlogController@getPost'
 ]);
 
 Route::get('/number-echo/:number', function($number){
@@ -113,19 +105,83 @@ If you want to make a placeholder (like `:title`) optional, you have to
 duplicate the route and remove the placeholder (`:title` in this case).
 ```php
 Route::get('/blog/:id/', [
-    'controller' => 'BlogController',
-    'method' => 'getPost'
+    'uses' => 'BlogController@getPost'
 ]);
 
 Route::get('/blog/:id/:title', [
-    'controller' => 'BlogController',
-    'method' => 'getPost'
+    'uses' => 'BlogController@getPost'
 ]);
 ```
 
-## Importing routes
+## Importing and grouping routes
 If you are writing an application or just a large website, you might be
-interested in importing routes, so you have multiple route files.
+interested in importing and grouping routes, so routes are more separated.
+
+### Importing
 ```php
 Route::import(VENDOR_DIR.'/ExampleApp/routes.php');
+```
+
+### Grouping
+The `group` method accepts one and two arguments. If you provide one argument,
+it must be callable.
+```php
+Route::group(function(){
+
+    // ...
+
+});
+```
+
+If you provide two arguments, the first argument can be either a
+string or an array and the second must be callable. If a string has been
+passed to the first argument, it will be accepted as the group prefix.
+```php
+Route::group('forum', function(){
+
+    Route::get('/login', function(){
+        // ...
+    });
+
+    // ...
+
+});
+```
+In case of an array, you have to add `'prefix' => 'value'`.
+```php
+Route::group([
+    'prefix' => 'forum',
+    // ...
+], function(){
+
+    // ...
+
+});
+```
+#### Prefixing
+You can prefix groups by using the dot notation, but you could also nest them.
+
+##### Dot notation
+```php
+Route::group('cms.admin.user-management', function(){
+
+    // ...
+
+});
+```
+##### Nesting
+```php
+Route::group('cms', function(){
+
+    Route::group('admin', function(){
+
+        Route::group('user-management', function(){
+
+            // ...
+
+        });
+
+    });
+
+});
 ```
